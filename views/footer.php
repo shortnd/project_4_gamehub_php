@@ -46,15 +46,15 @@
           $('#modalLoginTitle').html("Sign Up");
           $('#loginSignUpButton').html("Sign Up");
           $('#toggleLogIn').html("Login");
-          $('.form-group').append('<div id="confirmPass"></div>');
-          $('#confirmPass').append("<label>Confirm Password</label>");
-          $('#confirmPass').append("<input type='password' class='form-control' placeholder='Confirm Password'>");
+          // $('.form-group').append('<div id="confirmPass"></div>');
+          // $('#confirmPass').append("<label>Confirm Password</label>");
+          // $('#confirmPass').append("<input type='password' class='form-control' placeholder='Confirm Password'>");
         } else {
           $('#loginActive').val("1");
           $('#modalLoginTitle').html("Login");
           $('#loginSignUpButton').html("Login");
           $('#toggleLogIn').html("Sign Up");
-          $('#confirmPass').remove();
+          // $('#confirmPass').remove();
         }
       })
 
