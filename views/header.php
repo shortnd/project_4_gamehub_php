@@ -29,9 +29,9 @@
           <a class="nav-link" href="$page=publicprofile">View Profiles</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <div class="form-inline my-2 my-lg-0">
 
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login/Sign Up</button>
-      </form>
+        <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#logInModal">Login/Sign Up</button>
+      </div>
     </div>
   </nav>
