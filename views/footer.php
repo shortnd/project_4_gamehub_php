@@ -1,7 +1,7 @@
 <footer class="footer">
-
+<div class="container text-center">
   <p>Created by Collin OConnell</p>
-
+</div>
 </footer>
 
 
