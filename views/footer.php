@@ -14,12 +14,13 @@
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+        <h5 class="modal-title" id="modalLoginTitle">Login</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+        <input type="hidden" name="loginActive" id="loginActive" value="1">
         <form>
           <fieldset class="form-group">
             <label for="userEmail">Email</label>
@@ -30,11 +31,35 @@
         </form>
       </div>
       <div class="modal-footer">
+        <button class="btn btn-outline-primary" id="toggleLogIn">Sign Up</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button"  class="btn btn-primary">Login</button>
+        <button type="button"  class="btn btn-primary" id="loginSignUpButton">Login</button>
       </div>
     </div>
     </div>
     </div>
+    <script>
+      $('#toggleLogIn').click(function(){
+        if ($('#loginActive').val() == "1"){
+          $('#loginActive').val("0");
+          $('#modalLoginTitle').html("Sign Up");
+          $('#loginSignUpButton').html("Sign Up");
+          $('#toggleLogIn').html("Login")
+          // $('.form-group').append("<label>Comfirm Password</label>");
+          // $('.form-group').append("<input type='password' class='form-control' placeholder='Confirm Password'>");
+        } else {
+          $('#loginActive').val("1");
+          $('#modalLoginTitle').html("Login");
+          $('#loginSignUpButton').html("Login");
+          $('#toggleLogIn').html("Sign Up")
+        }
+      })
+
+      $("loginSignUpButton").click(function(){
+        alert("HI THERE!")
+      })
+
+
+    </script>
   </body>
 </html>
