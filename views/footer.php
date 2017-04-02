@@ -63,7 +63,7 @@
           type: "POST",
           url: "actions.php?action=loginSignup",
           data: "email=" + $("#email").val() + "&password=" + $("#password").val()
-          + "&$loginActive=" + $("#loginActive").val(),
+          + "&loginActive=" + $("#loginActive").val(),
           success: function(res){
             alert(res);
           }
