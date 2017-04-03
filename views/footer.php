@@ -11,7 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <!-- Modal -->
-    <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logInModal" tabindex="-1" role="dialog" aria-labelledby="logInModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -25,9 +25,9 @@
         <form>
           <fieldset class="form-group">
             <label for="userEmail">Email</label>
-            <input type="email" class="form-control" id="userEmail" placeholder="Email">
-            <lable for="userPassword">Password</lable>
-            <input type="password" id="userPassword" class="form-control" placeholder="Password">
+            <input type="email" class="form-control" id="userEmail" placeholder="Email" required>
+            <label for="userPassword">Password</label>
+            <input type="password" id="userPassword" class="form-control" placeholder="Password" required>
           </fieldset>
         </form>
       </div>
@@ -62,7 +62,7 @@
         $.ajax({
           type: "POST",
           url: "actions.php?action=loginSignup",
-          data: "email=" + $("#email").val() + "&password=" + $("#password").val()
+          data: "email=" + $("#userEmail").val() + "&password=" + $("#userPassword").val()
           + "&loginActive=" + $("#loginActive").val(),
           success: function(res){
             alert(res);
