@@ -40,6 +40,7 @@
     </div>
     </div>
     <script>
+    //This toggles login/sign up form for the moduel
       $('#toggleLogIn').click(function(){
         if ($('#loginActive').val() == "1"){
           $('#loginActive').val("0");
@@ -57,7 +58,7 @@
           // $('#confirmPass').remove();
         }
       })
-
+      //Ajax to send and get the form info from the action.php
       $('#loginSignUpButton').click(function(){
         $.ajax({
           type: "POST",
