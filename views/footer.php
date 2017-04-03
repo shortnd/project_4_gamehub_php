@@ -21,6 +21,9 @@
         </button>
       </div>
       <div class="modal-body">
+        <div class="alert alert-danger" id="loginAlert">
+
+        </div>
         <input type="hidden" name="loginActive" id="loginActive" value="1">
         <form>
           <fieldset class="form-group">
@@ -66,7 +69,11 @@
           data: "email=" + $("#userEmail").val() + "&password=" + $("#userPassword").val()
           + "&loginActive=" + $("#loginActive").val(),
           success: function(res){
-            alert(res);
+            if(res == "1"){
+              window.location.assign("index.php");
+            } else {
+              $('#loginAlert').html(res).show();
+            }
           }
 
         })

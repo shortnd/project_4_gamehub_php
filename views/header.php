@@ -31,7 +31,12 @@
       </ul>
       <div class="form-inline my-2 my-lg-0">
 
+        <?php if($_SESSION['id']){ ?>
+          <a class="btn btn-outline-success my-2 my-sm-0" href ="?function=logout">Logout</a>
+        <?php } else { ?>
         <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#logInModal">Login/Sign Up</button>
+        <?php } ?>
+
       </div>
     </div>
   </nav>
