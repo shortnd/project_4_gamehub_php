@@ -10,9 +10,9 @@
   }
 
 
-  if($_GET['function'] == "logout"){
-    session_unset();
-  }
+  // if($_GET['function'] == "logout"){
+  //   session_unset();
+  // }
 
     function time_since($since) {
       $chunks = array(
@@ -42,11 +42,29 @@
     function displayPosts($type){
         global $link;
 
+        if($type == 'public'){
+
         $whereClause = "";
 
+      } else if($type == 'isFollowing') {
+        $query = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']);
+        $result = mysqli_query($link, $query);
 
-      $query = "SELECT * FROM posts ".$whereClause." ORDER BY `datetime` DESC LIMIT 10";
+        $whereClause = "";
 
+        while($row = mysqli_fetch_assoc($result)){
+          if($whereClause == "") $whereClause = "WHERE ";
+          else $whereClause.= " OR ";
+          $whereClause.= "userid = ".$row['isFollowing'];
+        }
+      } else {
+        echo "There are no posts to diplay";
+      }
+
+
+    // echo $whereClause;
+      $query = "SELECT * FROM posts ". $whereClause ." ORDER BY `datetime` DESC LIMIT 10";
+      // echo $query;
       $result = mysqli_query($link, $query);
 
       if(mysqli_num_rows($result) == 0){
@@ -61,11 +79,30 @@
 
           echo "<p>".$row['post']."</p>";
 
-          echo "<p>Follow</p></div>";
+
+          echo "<p><button class='toggleFollow a btn btn-primary' data-userId='".$row['userid']."'>";
+
+          // global $link;
+
+          $isFollowingQuery = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']) ." AND isFollowing =". mysqli_real_escape_string($link, $row['userid']) ." LIMIT 1";
+
+          $isFollowingQueryResult = mysqli_query($link, $isFollowingQuery);
+
+          // print_r $result;
+
+            if(mysqli_num_rows($isFollowingQueryResult)){
+              echo "Unfollow";
+            } else {
+              echo "Follow";
+            }
+
+          echo "</button></p></div>";
+
+          //$row['userid'];
         }
       }
-
     }
+
 
     function displaySearch(){
       echo '<div class="form">
@@ -91,4 +128,11 @@
     }
 
 
+
+
+
+
+    if($_GET['function'] == "logout"){
+      session_unset();
+    }
  ?>

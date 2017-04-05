@@ -79,6 +79,31 @@
         })
       })
 
+      $('.toggleFollow').click(function(){
+        // alert($(this).attr('data-userid'));
+        var id = $(this).attr('data-userid');
+        var a = $(".a[data-userId='" + $(this).attr('data-userid') + "']");
+        $.ajax({
+          type: "POST",
+          url: "actions.php?action=toggleFollow",
+          data: "userId=" + id,
+          success: function(res){
+            if (res == "1") {
+
+              a.html("Follow");
+              // alert(res);
+
+            } else if (res == "2") {
+
+              a.html("Unfollow");
+              // alert(res);
+
+            }
+          }
+
+        })
+      })
+
     </script>
   </body>
 </html>
