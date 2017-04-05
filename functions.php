@@ -60,7 +60,19 @@
       } else if($type == "yourPosts"){
         $whereClause = "WHERE userid = " . mysqli_real_escape_string($link, $_SESSION['id']);
       } else if($type == "search") {
+
+        echo '<p>Showing results for "'. mysqli_real_escape_string($link, $_GET['q']).'":</p>';
+
+
         $whereClause = "WHERE post LIKE '%" . mysqli_real_escape_string($link, $_GET['q'])."%'";
+      } else if(is_numeric($type)) {
+        $userQuery = "SELECT * FROM users WHERE id = ".mysqli_real_escape_string($link, $type ." LIMIT 1");
+        $userQueryResult = mysqli_query($link, $userQuery);
+        $user = mysqli_fetch_assoc($userQueryResult);
+
+        echo "<h2>Posts by: ".mysqli_real_escape_string($link, $user['email'])."</h2>";
+
+        $whereClause = "WHERE userid =" .mysqli_real_escape_string($link, $type);
       } else {
         echo "There are no posts to diplay";
       }
@@ -79,7 +91,7 @@
           $userQueryResult = mysqli_query($link, $userQuery);
           $user = mysqli_fetch_assoc($userQueryResult);
 
-          echo "<div class='tweet'><p>".$user['email']." <span class='time'>".@time_since(time()- strtotime($row['datetime']))." ago</span></p>";
+          echo "<div class='post'><p><a href='?page=viewprofiles&userid=".$user['id']."'> ".$user['email']."</a> <span class='time'>".@time_since(time()- strtotime($row['datetime']))." ago</span></p>";
 
           echo "<p>".$row['post']."</p>";
 
@@ -136,4 +148,17 @@
       }
     }
 
+
+    function displayUsers(){
+
+      global $link;
+
+      $query = "SELECT * FROM users LIMIT 10";
+
+      $result = mysqli_query($link, $query);
+
+      while($row = mysqli_fetch_assoc($result)){
+        echo "<p><a href='?page=viewprofiles&userid=".$row['id']."'>".$row['email']."</a></p>";
+      }
+    }
  ?>

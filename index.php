@@ -7,6 +7,8 @@ if($_GET["page"] == "timeline"){
   include ("views/yourposts.php");
 } else if($_GET["page"] == "search") {
   include("views/search.php");
+} else if($_GET["page"] == "viewprofiles"){
+  include ("views/viewprofiles.php");
 } else {
   include ("views/home.php");
 }

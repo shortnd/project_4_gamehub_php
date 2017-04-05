@@ -28,7 +28,7 @@
           <a class="nav-link" href="?page=yourposts">Your Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="?page=publicprofile">View Profiles</a>
+          <a class="nav-link" href="?page=viewprofiles">View Profiles</a>
         </li>
         <?php } else { ?>
           <?php } ?>
