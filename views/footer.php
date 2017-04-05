@@ -1,6 +1,6 @@
-<footer class="footer">
+<footer class="footer fixed">
 <div class="container text-center">
-  <p>Created by Collin OConnell</p>
+  <p class="text-muted">Created by Collin OConnell</p>
 </div>
 </footer>
 
@@ -112,6 +112,7 @@
           data: "postContent=" + $("#postContent").val(),
           success: function(res){
               if(res == 1){
+                location.reload();
                 $("#postSuccess").show();
                 $("#postFail").hide();
               } else if (res != ""){
@@ -125,6 +126,16 @@
           })
         })
 
+
+        var text_max = 140;
+        $('#textarea_feedback').html(text_max + ' characters remaining.');
+
+        $('#postContent').keyup(function(){
+          var text_length = $('#postContent').val().length;
+          var text_remaining = text_max - text_length;
+
+          $('#textarea_feedback').html(text_remaining + ' characters remaining.');
+        });
     </script>
   </body>
 </html>

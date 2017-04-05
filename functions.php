@@ -59,6 +59,8 @@
         }
       } else if($type == "yourPosts"){
         $whereClause = "WHERE userid = " . mysqli_real_escape_string($link, $_SESSION['id']);
+      } else if($type == "search") {
+        $whereClause = "WHERE post LIKE '%" . mysqli_real_escape_string($link, $_GET['q'])."%'";
       } else {
         echo "There are no posts to diplay";
       }
@@ -108,11 +110,12 @@
 
     function displaySearch(){
       echo '<div class="form">
-              <div class="form-group">
-                <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search">
+              <form class="form-group">
+              <input type="hidden" name="page" value="search">
+                <input type="text" name="q" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search">
 
                 <button class="btn btn-primary searchAndPost">Search Post</button>
-              </div>
+              </form>
             </div>';
     }
 
@@ -121,10 +124,11 @@
       if($_SESSION['id'] > 0){
         echo '<br/>
               <div id="postSuccess" class="alert alert-success" style="display: none;">Your post was successfully posted.</div>
-              <div id="postFail" class="alert alert-danger" style="disply: none;"></div>
+              <div id="postFail" class="alert alert-danger" style="display: none;"></div>
               <div class="form">
                 <div class="form-group">
-                  <textarea type="text" class="form-control" rows="3" id="postContent"></textarea>
+                  <textarea type="text" class="form-control" rows="3" id="postContent" maxlength="140"></textarea>
+                  <div id="textarea_feedback"></div>
 
                   <button class="btn btn-primary writePost" id="submitPostButton">Post</button>
                 </div>
