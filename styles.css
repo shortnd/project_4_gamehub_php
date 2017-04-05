@@ -28,6 +28,10 @@
 
 }
 
+/*#postSuccess, #postFail {
+  display: none;
+}*/
+
 /* Sticky footer styles
 -------------------------------------------------- */
 

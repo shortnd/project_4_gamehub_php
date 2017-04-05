@@ -98,5 +98,17 @@
 
           }
         }
+
+
+      if($_GET['action'] == 'postPost'){
+        if(!$_POST['postContent']){
+          echo "Please enter some text to post..";
+        } else if (strlen($_POST['postContent'] > 140)){
+          echo "Your post is too long..";
+        } else {
+          mysqli_query($link, "INSERT INTO posts (`post`, `userid`, `datetime`) VALUES ('".mysqli_real_escape_string($link, $_POST['postContent'])."', ".mysqli_real_escape_string($link, $_SESSION['id']).", NOW())");
+          echo "1";
+        }
+      }
       // print_r($_POST);
 ?>

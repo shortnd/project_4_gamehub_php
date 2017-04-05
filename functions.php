@@ -10,9 +10,9 @@
   }
 
 
-  // if($_GET['function'] == "logout"){
-  //   session_unset();
-  // }
+  if($_GET['function'] == "logout"){
+    session_unset();
+  }
 
     function time_since($since) {
       $chunks = array(
@@ -57,12 +57,14 @@
           else $whereClause.= " OR ";
           $whereClause.= "userid = ".$row['isFollowing'];
         }
+      } else if($type == "yourPosts"){
+        $whereClause = "WHERE userid = " . mysqli_real_escape_string($link, $_SESSION['id']);
       } else {
         echo "There are no posts to diplay";
       }
 
 
-    // echo $whereClause;
+      // echo $whereClause;
       $query = "SELECT * FROM posts ". $whereClause ." ORDER BY `datetime` DESC LIMIT 10";
       // echo $query;
       $result = mysqli_query($link, $query);
@@ -117,22 +119,17 @@
 
     function displayPostBox(){
       if($_SESSION['id'] > 0){
-        echo '<div class="form">
+        echo '<br/>
+              <div id="postSuccess" class="alert alert-success" style="display: none;">Your post was successfully posted.</div>
+              <div id="postFail" class="alert alert-danger" style="disply: none;"></div>
+              <div class="form">
                 <div class="form-group">
                   <textarea type="text" class="form-control" rows="3" id="postContent"></textarea>
 
-                  <button class="btn btn-primary searchAndPost">Post</button>
+                  <button class="btn btn-primary writePost" id="submitPostButton">Post</button>
                 </div>
               </div>';
       }
     }
 
-
-
-
-
-
-    if($_GET['function'] == "logout"){
-      session_unset();
-    }
  ?>

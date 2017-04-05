@@ -3,6 +3,8 @@ include ("functions.php");
 include ("views/header.php");
 if($_GET["page"] == "timeline"){
   include("views/timeline.php");
+} else if ($_GET["page"] == "yourposts"){
+  include ("views/yourposts.php");
 } else {
   include ("views/home.php");
 }

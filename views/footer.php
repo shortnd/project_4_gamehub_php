@@ -104,6 +104,27 @@
         })
       })
 
+
+      $("#submitPostButton").click(function(){
+        $.ajax({
+          type: "POST",
+          url: "actions.php?action=postPost",
+          data: "postContent=" + $("#postContent").val(),
+          success: function(res){
+              if(res == 1){
+                $("#postSuccess").show();
+                $("#postFail").hide();
+              } else if (res != ""){
+                $("#postFail").html(res).show();
+                $("#postSuccess").hide();
+              } else {
+                $("#postFail").hide();
+                $("#postSuccess").hide();
+              }
+            }
+          })
+        })
+
     </script>
   </body>
 </html>

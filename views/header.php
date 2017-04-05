@@ -18,17 +18,21 @@
     <a class="navbar-brand" href="/~Shortnd">Gamehub</a>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <?php if($_SESSION['id']){ ?>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="?page=timeline">Your Timeline</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="$page=yourtweets">Your Posts</a>
+          <a class="nav-link" href="?page=yourposts">Your Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="$page=publicprofile">View Profiles</a>
+          <a class="nav-link" href="?page=publicprofile">View Profiles</a>
         </li>
+        <?php } else { ?>
+          <?php } ?>
       </ul>
+
       <div class="form-inline my-2 my-lg-0">
 
         <?php if($_SESSION['id']){ ?>
