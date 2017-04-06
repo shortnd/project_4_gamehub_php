@@ -46,26 +46,30 @@
 
         $whereClause = "";
 
-      } else if($type == 'isFollowing') {
-        $query = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']);
-        $result = mysqli_query($link, $query);
 
-        $whereClause = "";
 
-        while($row = mysqli_fetch_assoc($result)){
-          if($whereClause == "") $whereClause = "WHERE ";
-          else $whereClause.= " OR ";
-          $whereClause.= "userid = ".$row['isFollowing'];
-        }
-      } else if($type == "yourPosts"){
+      }
+      // else if($type == 'isFollowing') {
+      //   $query = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']);
+      //   $result = mysqli_query($link, $query);
+      //   $whereClause = "";
+      //   while($row = mysqli_fetch_assoc($result)){
+      //     if($whereClause == "") $whereClause = "WHERE ";
+      //     else $whereClause.= " OR ";
+      //     $whereClause.= "userid = ".$row['isFollowing'];
+      //   }
+      // }
+      else if($type == "yourPosts"){
         $whereClause = "WHERE userid = " . mysqli_real_escape_string($link, $_SESSION['id']);
-      } else if($type == "search") {
+      }
+      else if($type == "search") {
 
         echo '<p>Showing results for "'. mysqli_real_escape_string($link, $_GET['q']).'":</p>';
 
 
         $whereClause = "WHERE post LIKE '%" . mysqli_real_escape_string($link, $_GET['q'])."%'";
-      } else if(is_numeric($type)) {
+      }
+      else if(is_numeric($type)) {
         $userQuery = "SELECT * FROM users WHERE id = ".mysqli_real_escape_string($link, $type ." LIMIT 1");
         $userQueryResult = mysqli_query($link, $userQuery);
         $user = mysqli_fetch_assoc($userQueryResult);
@@ -73,8 +77,18 @@
         echo "<h2>Posts by: ".mysqli_real_escape_string($link, $user['email'])."</h2>";
 
         $whereClause = "WHERE userid =" .mysqli_real_escape_string($link, $type);
+      }
+      else if($type == 'isFollowing') {
+        $query = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']);
+        $result = mysqli_query($link, $query);
+        $whereClause = "";
+        while($row = mysqli_fetch_assoc($result)){
+          if($whereClause == "") $whereClause = "WHERE ";
+          else $whereClause.= " OR ";
+          $whereClause.= "userid = ".$row['isFollowing'];
+        }
       } else {
-        echo "There are no posts to diplay";
+        echo "<h4>You are not following anyone please follow someone to view there posts</h4>";
       }
 
 
@@ -83,7 +97,7 @@
       // echo $query;
       $result = mysqli_query($link, $query);
 
-      if(mysqli_num_rows($result) == 0){
+      if(mysqli_num_rows($result)==0){
         echo "There are no posts to diplay";
       } else {
         while ($row = mysqli_fetch_assoc($result)){
@@ -91,12 +105,15 @@
           $userQueryResult = mysqli_query($link, $userQuery);
           $user = mysqli_fetch_assoc($userQueryResult);
 
-          echo "<div class='post'><p><a href='?page=viewprofiles&userid=".$user['id']."'> ".$user['email']."</a> <span class='time'>".@time_since(time()- strtotime($row['datetime']))." ago</span></p>";
+          echo "<div class='card'>";
+          echo "<div card='card-block'";
+          echo "<div class='card-header'><p><a class='text-success' href='?page=viewprofiles&userid=".$user['id']."'> ".$user['email']."</a> <span class='time'>".@time_since(time()- strtotime($row['datetime']))." ago</span></p>";
 
-          echo "<p>".$row['post']."</p>";
+          echo "<p class='card-text'>".$row['post']."</p>";
 
 
-          echo "<p><button class='toggleFollow a btn btn-primary' data-userId='".$row['userid']."'>";
+          echo "<p><button class='toggleFollow a btn btn-outline-success' data-userId='".$row['userid']."'>";
+
 
           // global $link;
 
@@ -114,6 +131,9 @@
 
           echo "</button></p></div>";
 
+          // echo "</div>";
+          echo "</div>";
+
           //$row['userid'];
         }
       }
@@ -126,7 +146,7 @@
               <input type="hidden" name="page" value="search">
                 <input type="text" name="q" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search">
 
-                <button class="btn btn-primary searchAndPost">Search Post</button>
+                <button class="btn btn-outline-success searchAndPost">Search</button>
               </form>
             </div>';
     }
@@ -135,6 +155,7 @@
     function displayPostBox(){
       if($_SESSION['id'] > 0){
         echo '<br/>
+              <div class="header-3"><h3>Write your post:</h3></div>
               <div id="postSuccess" class="alert alert-success" style="display: none;">Your post was successfully posted.</div>
               <div id="postFail" class="alert alert-danger" style="display: none;"></div>
               <div class="form">
@@ -142,7 +163,7 @@
                   <textarea type="text" class="form-control" rows="3" id="postContent" maxlength="140"></textarea>
                   <div id="textarea_feedback"></div>
 
-                  <button class="btn btn-primary writePost" id="submitPostButton">Post</button>
+                  <button class="btn btn-outline-success writePost" id="submitPostButton">Post</button>
                 </div>
               </div>';
       }
@@ -158,7 +179,8 @@
       $result = mysqli_query($link, $query);
 
       while($row = mysqli_fetch_assoc($result)){
-        echo "<p><a href='?page=viewprofiles&userid=".$row['id']."'>".$row['email']."</a></p>";
+        echo "<p><a class='text-success' href='?page=viewprofiles&userid=".$row['id']."'>".$row['email']."</a></p>";
       }
     }
+
  ?>

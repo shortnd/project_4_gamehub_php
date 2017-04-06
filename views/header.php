@@ -9,8 +9,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/Icon.png">
   </head>
-  <body>
+  <body class="background">
 
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,7 +38,7 @@
       <div class="form-inline my-2 my-lg-0">
 
         <?php if($_SESSION['id']){ ?>
-          <a class="btn btn-outline-success my-2 my-sm-0" href ="?function=logout">Logout</a>
+          <a class="btn btn-outline-success my-2 my-sm-0" href="?function=logout">Logout</a>
         <?php } else { ?>
         <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#logInModal">Login/Sign Up</button>
         <?php } ?>

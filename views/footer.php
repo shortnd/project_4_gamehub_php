@@ -1,6 +1,7 @@
+</body>
 <footer class="footer fixed">
 <div class="container text-center">
-  <p class="text-muted">Created by Collin OConnell</p>
+  <p class="text-muted">Created by Collin OConnell | <a href="https://www.shortnd.design" target="_blank">www.shortnd.design</a></p>
 </div>
 </footer>
 
@@ -35,9 +36,9 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline-primary" id="toggleLogIn">Sign Up</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button"  class="btn btn-primary" id="loginSignUpButton">Login</button>
+        <button class="btn btn-outline-success" id="toggleLogIn">Sign Up</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+        <button type="button"  class="btn btn-outline-success" id="loginSignUpButton">Login</button>
       </div>
     </div>
     </div>
@@ -63,7 +64,7 @@
       })
       //Ajax to send and get the form info from the action.php
       $('#loginSignUpButton').click(function(){
-        $.ajax({
+          $.ajax({
           type: "POST",
           url: "actions.php?action=loginSignup",
           data: "email=" + $("#userEmail").val() + "&password=" + $("#userPassword").val()
@@ -78,6 +79,25 @@
 
         })
       })
+
+      $('#signUpButton2').click(function(){
+        // alert("clicked");
+        $.ajax({
+          type: "POST",
+          url: "actions.php?action=signUp",
+          data: "email=" + $("#userSignUpEmail").val() + "&password=" + $("#userSignUpPassword").val()
+          + "&signUpActive=" + $("#signUpActive").val(),
+          success: function(res){
+            // alert(res);
+            if(res == "1"){
+              window.location.assign("index.php");
+            } else {
+              $('#loginAlert').html(res).show();
+            }
+          }
+
+        })
+      });
 
       $('.toggleFollow').click(function(){
         // alert($(this).attr('data-userid'));
@@ -137,5 +157,4 @@
           $('#textarea_feedback').html(text_remaining + ' characters remaining.');
         });
     </script>
-  </body>
 </html>
