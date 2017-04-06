@@ -1,7 +1,7 @@
 </body>
 <footer class="footer fixed">
 <div class="container text-center">
-  <p class="text-muted">Created by Collin OConnell | <a href="https://www.shortnd.design" target="_blank">www.shortnd.design</a></p>
+  <p class="text-muted">Created by Collin OConnell | <a href="http://www.shortnd.design" target="_blank">www.shortnd.design</a></p>
 </div>
 </footer>
 
