@@ -1,5 +1,6 @@
-<div class="container postContainer">
+
   <?php if($_SESSION['id']){ ?>
+<div class="container postContainer">
   <div class="row">
     <div class="col-8">
       <h2>Search Results</h2>
@@ -13,7 +14,9 @@
       <?#php displayPostBox(); ?>
     </div>
   </div>
+</div>
   <?php } else { ?>
+    <div class="container postContainer">
         <header>
             <h1 class="text-hide">Gamehub</h1>
             <img class="img-fluid" src="img/Gamehub_logo.png" alt="Gamehub logo">
@@ -54,5 +57,6 @@
                 </div>
             </div>
         </div>
+      </main>
+    </div>
     <?php } ?>
-</div>

@@ -6,18 +6,14 @@
 
       <h2>Following Posts</h2>
 
-      <?php displayPosts("isFollowing" > 0); ?>
+      <?php displayPosts("isFollowing"); ?>
 
     </div>
     <div class="col-4">
       <?php displaySearch(); ?>
-      <br/>
-      <?#php displayPostBox(); ?>
     </div>
   </div>
-</div>
   <?php } else { ?>
-    <div class="container postContainer">
         <header>
             <h1 class="text-hide">Gamehub</h1>
             <img class="img-fluid" src="img/Gamehub_logo.png" alt="Gamehub logo">
@@ -58,5 +54,6 @@
                 </div>
             </div>
         </div>
-  </div>
+      </main>
 <?php } ?>
+</div>

@@ -3,7 +3,6 @@
   <div class="row">
     <div class="col-8">
 
-
       <h2>Your Posts</h2>
 
       <?php displayPosts("yourPosts"); ?>
@@ -58,5 +57,6 @@
               </div>
           </div>
       </div>
+    </main>
   </div>
   <?php } ?>

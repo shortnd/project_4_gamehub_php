@@ -45,21 +45,7 @@
         if($type == 'public'){
 
         $whereClause = "";
-
-
-
-      }
-      // else if($type == 'isFollowing') {
-      //   $query = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']);
-      //   $result = mysqli_query($link, $query);
-      //   $whereClause = "";
-      //   while($row = mysqli_fetch_assoc($result)){
-      //     if($whereClause == "") $whereClause = "WHERE ";
-      //     else $whereClause.= " OR ";
-      //     $whereClause.= "userid = ".$row['isFollowing'];
-      //   }
-      // }
-      else if($type == "yourPosts"){
+      } else if($type == "yourPosts"){
         $whereClause = "WHERE userid = " . mysqli_real_escape_string($link, $_SESSION['id']);
       }
       else if($type == "search") {
@@ -77,28 +63,30 @@
         echo "<h2>Posts by: ".mysqli_real_escape_string($link, $user['email'])."</h2>";
 
         $whereClause = "WHERE userid =" .mysqli_real_escape_string($link, $type);
-      }
-      else if($type == 'isFollowing') {
+      } else if($type == 'isFollowing') {
         $query = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']);
         $result = mysqli_query($link, $query);
         $whereClause = "";
+
         while($row = mysqli_fetch_assoc($result)){
-          if($whereClause == "") $whereClause = "WHERE ";
-          else $whereClause.= " OR ";
-          $whereClause.= "userid = ".$row['isFollowing'];
+          if($whereClause == "") {$whereClause = "WHERE ";}
+          else {$whereClause.= " OR";}
+          $whereClause.= " userid = ".$row['isFollowing'];
+          $res = 1;
         }
-      } else {
-        echo "<h4>You are not following anyone please follow someone to view there posts</h4>";
+        if($res == 1){
+
+        } else {
+          echo "Please Select a User to follow to display there posts here.";
+        }
       }
 
-
-      // echo $whereClause;
       $query = "SELECT * FROM posts ". $whereClause ." ORDER BY `datetime` DESC LIMIT 10";
-      // echo $query;
+
       $result = mysqli_query($link, $query);
 
-      if(mysqli_num_rows($result)==0){
-        echo "There are no posts to diplay";
+      if(mysqli_num_rows($result) == 0){
+        echo "There are no posts to display";
       } else {
         while ($row = mysqli_fetch_assoc($result)){
           $userQuery = "SELECT * FROM users WHERE id = ".mysqli_real_escape_string($link, $row['userid']." LIMIT 1");
@@ -108,20 +96,12 @@
           echo "<div class='card'>";
           echo "<div card='card-block'";
           echo "<div class='card-header'><p><a class='text-success' href='?page=viewprofiles&userid=".$user['id']."'> ".$user['email']."</a> <span class='time'>".@time_since(time()- strtotime($row['datetime']))." ago</span></p>";
-
           echo "<p class='card-text'>".$row['post']."</p>";
-
-
           echo "<p><button class='toggleFollow a btn btn-outline-success' data-userId='".$row['userid']."'>";
-
-
-          // global $link;
 
           $isFollowingQuery = "SELECT * FROM isFollowing WHERE follower = " . mysqli_real_escape_string($link, $_SESSION['id']) ." AND isFollowing =". mysqli_real_escape_string($link, $row['userid']) ." LIMIT 1";
 
           $isFollowingQueryResult = mysqli_query($link, $isFollowingQuery);
-
-          // print_r $result;
 
             if(mysqli_num_rows($isFollowingQueryResult)){
               echo "Unfollow";
@@ -130,11 +110,8 @@
             }
 
           echo "</button></p></div>";
-
-          // echo "</div>";
           echo "</div>";
 
-          //$row['userid'];
         }
       }
     }
