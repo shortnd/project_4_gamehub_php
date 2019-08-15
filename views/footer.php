@@ -17,8 +17,8 @@
         <div class="alert alert-danger" id="loginAlert">
 
         </div>
-        <input type="hidden" name="loginActive" id="loginActive" value="1">
         <form>
+          <input type="hidden" name="loginActive" id="loginActive" value="1">
           <fieldset class="form-group">
             <label for="userEmail">Email</label>
             <input type="email" class="form-control" id="userEmail" placeholder="Email" required>

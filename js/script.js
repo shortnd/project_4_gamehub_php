@@ -1,20 +1,19 @@
 //This toggles login/sign up form for the moduel
   $('#toggleLogIn').on('click',function(){
-    $('#confirmPass').css('display', 'none');
     if ($('#loginActive').val() == "1"){
-      $('#loginActive').val("0");
-      $('#modalLoginTitle').html("Sign Up");
-      $('#loginSignUpButton').html("Sign Up");
-      $('#toggleLogIn').html("Login");
-      $('.form-group').append('<div id="confirmPass"><label>Confirm Password</label><input type=\'password\' class=\'form-control\' placeholder=\'Confirm Password\'></div>');
-      return;
-    } else {
-      $('#loginActive').val("1");
-      $('#modalLoginTitle').html("Login");
-      $('#loginSignUpButton').html("Login");
-      $('#toggleLogIn').html("Sign Up");
-      return;
-    }
+        $('#loginActive').val("0");
+        $('#modalLoginTitle').html("Sign Up");
+        $('#loginSignUpButton').html("Sign Up");
+        $('#toggleLogIn').html("Login");
+        $('<div id="confirmPass"><label>Confirm Password</label><input type="password" class="form-control" placeholder="Confirm Password"></div>').appendTo($('.form-group'));
+        return false;
+      } else {
+        $('#loginActive').val("1");
+        $('#modalLoginTitle').html("Login");
+        $('#loginSignUpButton').html("Login");
+        $('#toggleLogIn').html("Sign Up");
+        document.querySelector("#confirmPass").remove()
+      }
   });
   //Ajax to send and get the form info from the action.php
   $('#loginSignUpButton').click(function(){
@@ -42,7 +41,6 @@
       data: "email=" + $("#userSignUpEmail").val() + "&password=" + $("#userSignUpPassword").val()
       + "&signUpActive=" + $("#signUpActive").val(),
       success: function(res){
-        // alert(res);
         if(res == "1"){
           window.location.assign("index.php");
         } else {

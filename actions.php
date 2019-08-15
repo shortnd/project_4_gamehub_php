@@ -5,12 +5,14 @@
 
       $error = "";
 
-      if (!isset($_POST['email'])) {
+      // var_dump($_POST['email']);
+      if (!$_POST['email']) {
         $error = "Please enter an email address.";
-      } else if(!isset($_POST['password'])){
+      } else if(!$_POST['password']){
         $error = "Please enter a password";
-      } else if(!filter_var(isset($_POST['email']), FILTER_VALIDATE_EMAIL)) {
-        $error = "Invalid email format";
+      } else if(! filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        // $errRes = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        $error = "Invalid email format - {$errRes}";
       }
 
       if($error != "" ){
@@ -26,9 +28,7 @@
         // echo $query;
         $result = mysqli_query($link, $query);
 
-        // print_r $result;
-
-          if(mysqli_num_rows($result)) {
+          if (mysqli_num_rows($result)) {
             $error = "That email address is already taken";
           } else {
             $query= "INSERT INTO users (`email`, `password`) VALUES ('".$email."','".$password."')";
@@ -120,8 +120,8 @@
           $error = "Please enter an email address.";
         } else if(!$_POST['password']){
           $error = "Please enter a password";
-        } else if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-          $error = "Invalid email format";
+        } else if(!filter_var(isset($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+          $error = "Invalid email format {$_POST['email']}";
         }
 
         if($error != "" ){

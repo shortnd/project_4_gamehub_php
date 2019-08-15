@@ -11,7 +11,7 @@
   }
 
 
-  if(isset($_GET['function']) == "logout"){
+  if($_POST['function'] == "logout"){
     session_unset();
   }
 
@@ -161,4 +161,4 @@
       }
     }
 
- ?>
+?>
