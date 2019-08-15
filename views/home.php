@@ -1,4 +1,4 @@
-<?php if($_SESSION['id']){ ?>
+<?php if(isset($_SESSION['id'])){ ?>
 <div class="container postContainer">
 <div class="row">
   <div class="col-8">

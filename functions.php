@@ -2,7 +2,8 @@
 
   session_start();
 
-  $link = mysqli_connect("localhost", "root", "password", "gamehub");
+  // $link = mysqli_connect("localhost", "root", "password", "gamehub");
+  $link = mysqli_connect("localhost", "root", "", "gamehub");
 
   if(mysqli_connect_error()){
     print_r(mysqli_connect_error());
@@ -10,7 +11,7 @@
   }
 
 
-  if($_GET['function'] == "logout"){
+  if(isset($_GET['function']) == "logout"){
     session_unset();
   }
 

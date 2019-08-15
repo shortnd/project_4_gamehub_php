@@ -1,15 +1,15 @@
 <?php
   include("functions.php");
 
-    if($_GET['action'] == 'loginSignup'){
+    if(isset($_GET['action']) == 'loginSignup'){
 
       $error = "";
 
-      if (!$_POST['email']) {
+      if (!isset($_POST['email'])) {
         $error = "Please enter an email address.";
-      } else if(!$_POST['password']){
+      } else if(!isset($_POST['password'])){
         $error = "Please enter a password";
-      } else if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+      } else if(!filter_var(isset($_POST['email']), FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid email format";
       }
 
@@ -178,4 +178,3 @@
           }
         }
       // print_r($_POST);
-?>
