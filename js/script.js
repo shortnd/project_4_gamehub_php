@@ -1,17 +1,19 @@
 //This toggles login/sign up form for the moduel
   $('#toggleLogIn').on('click',function(){
+    $('#confirmPass').css('display', 'none');
     if ($('#loginActive').val() == "1"){
       $('#loginActive').val("0");
       $('#modalLoginTitle').html("Sign Up");
       $('#loginSignUpButton').html("Sign Up");
       $('#toggleLogIn').html("Login");
       $('.form-group').append('<div id="confirmPass"><label>Confirm Password</label><input type=\'password\' class=\'form-control\' placeholder=\'Confirm Password\'></div>');
+      return;
     } else {
-      $('#confirmPass').length
       $('#loginActive').val("1");
       $('#modalLoginTitle').html("Login");
       $('#loginSignUpButton').html("Login");
       $('#toggleLogIn').html("Sign Up");
+      return;
     }
   });
   //Ajax to send and get the form info from the action.php
